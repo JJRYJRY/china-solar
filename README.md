@@ -152,8 +152,7 @@ and corresponding versioned releases are archived on Zenodo with a
 permanent digital object identifier.
 
 - GitHub: https://github.com/JJRYJRY/china-solar
-- Zenodo: https://doi.org/10.5281/zenodo.XXXXXXX *(replace with the DOI
-  issued for the archived release)*
+- Zenodo: https://doi.org/10.5281/zenodo.20264929
 
 ## Citation
 
