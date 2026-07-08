@@ -13,7 +13,7 @@ example, a more recent release of a source dataset, or polygons collected
 for a later year), it uses the trained DeepLab V3+ model to assess each
 polygon and decides whether it should be incorporated into the dataset.
 
-The validation procedure follows Section 2.5 of the manuscript exactly:
+The validation procedure follows the Methods section of the manuscript exactly:
 
   * Each candidate PV patch is evaluated with the Intersection over Union
     (IoU) as the sole metric of segmentation quality.
@@ -100,7 +100,7 @@ ZOOM = 16                # XYZ tile zoom level
 IMG_SIZE = 256           # tiles are resized to IMG_SIZE x IMG_SIZE
 NUM_CLASSES = 2          # 0 = background, 1 = PV
 
-# Patch-level retention rule (Section 2.5 of the manuscript):
+# Patch-level retention rule (the Methods section of the manuscript):
 # IoU is the sole metric, and a patch is retained when IoU > IOU_THRESHOLD.
 # The 0.5 threshold follows the PASCAL VOC protocol (Everingham et al., 2010).
 IOU_THRESHOLD = 0.5
@@ -338,7 +338,7 @@ def evaluate_polygon(model, poly, args):
 
     The predicted and reference PV masks of every overlapping tile are
     concatenated, and a single IoU value for the PV class is computed.
-    IoU is the sole metric, in line with Section 2.5 of the manuscript.
+    IoU is the sole metric, in line with the Methods section of the manuscript.
 
     Returns
     -------
@@ -526,7 +526,7 @@ def save_validation_report(passed_rows, failed_rows, skipped_rows,
         f"  tile zoom level               : Z={args.zoom}",
         f"  IoU retention threshold       : {args.iou_threshold}",
         "",
-        "  Metric: IoU is the sole metric (Section 2.5 of the manuscript).",
+        "  Metric: IoU is the sole metric (the Methods section of the manuscript).",
         "  A patch is retained when its IoU exceeds the threshold,",
         "  following the PASCAL VOC protocol (Everingham et al., 2010).",
         "  Patches without available imagery are reported as SKIPPED and",

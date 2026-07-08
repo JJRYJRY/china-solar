@@ -6,7 +6,7 @@ train.py
 
 Training script for the DeepLab V3+ semantic segmentation model used to
 identify photovoltaic (PV) installations from remote sensing imagery, as
-described in Section 2.5 of the PVCF manuscript.
+described in the Methods section of the PVCF manuscript.
 
 The script provides a complete and reproducible pipeline:
 
@@ -29,13 +29,13 @@ Note on metrics
 This training script and the manuscript use metrics at two different
 stages, and the two should not be conflated:
 
-  * Training and hyperparameter optimisation (Section 2.5 of the
+  * Training and hyperparameter optimisation (the Methods section of the
     manuscript). Under the optimal hyperparameter settings the trained
     model is assessed on the held-out validation set with three metrics:
     mIoU, pixel accuracy and the Dice coefficient. These three metrics are
     what this script computes (see `compute_metrics`) and reports.
 
-  * Screening of the medium-confidence regions. In that later step the
+  * Screening of the medium agreement regions. In that later step the
     Intersection over Union (IoU) is used as the sole metric to assess the
     segmentation quality of each PV patch, and a patch is retained only
     when its IoU exceeds 0.5 (the PASCAL VOC protocol). That patch-level
@@ -56,7 +56,7 @@ Two imagery sources are supported and selected with --tile-source:
         the standard {base-url}/{z}/{y}/{x} XYZ scheme. The base URL must be
         supplied by the user via --tile-base-url; no service endpoint is
         hard-coded in this script. The manuscript used the Esri World
-        Imagery Wayback service (see Section 2.5); reproduction users should
+        Imagery Wayback service (see the Methods section of the manuscript); reproduction users should
         provide a basemap service for which they hold valid access rights.
 
 Outputs
@@ -449,16 +449,17 @@ class PVSegmentationDataset(Dataset):
 # 8. Evaluation metrics
 # ============================================================
 def compute_metrics(preds, targets, num_classes=NUM_CLASSES):
-    """Compute the three validation metrics reported in Section 2.5.
+    """Compute the three validation metrics reported in the Methods section of the manuscript.
 
     Under the optimal hyperparameter settings the manuscript reports mIoU,
     pixel accuracy and the Dice coefficient on the held-out validation set;
     this function computes exactly those three metrics. The per-class IoU
     values are also returned through `miou`.
 
-    Note: this is the training-stage evaluation. The separate medium-
-    confidence screening described in Section 2.5 uses IoU alone, with a
-    0.5 retention threshold, and is not part of this function.
+    Note: this is the training-stage evaluation. The separate medium
+    agreement screening described in the Methods section of the manuscript
+    uses IoU alone, with a 0.5 retention threshold, and is not part of
+    this function.
 
     Returns
     -------

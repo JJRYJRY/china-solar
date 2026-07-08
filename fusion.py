@@ -14,8 +14,8 @@ format. Each source dataset is reprojected to a common metric coordinate
 reference system, rasterised onto a shared grid, and the resulting binary
 PV masks are summed. The value of every output pixel is therefore the
 "overlap count": the number of source datasets that identify that pixel as
-PV. This overlap count is the spatial-consistency indicator used in the
-manuscript to define low-, medium- and high-confidence regions.
+PV. This overlap count is the spatial agreement indicator used in the
+manuscript to define low, medium and high agreement regions.
 
 Workflow
 --------

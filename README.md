@@ -2,7 +2,7 @@
 
 This repository contains the code used to construct the **PVCF dataset**, a
 high-resolution photovoltaic (PV) vector dataset for China, as described in
-the manuscript *"PVCF: A High-Resolution, Spatially Consistent Multi-Source
+the manuscript *"A High-Resolution, Spatially Consistent Multi-Source
 Fusion Dataset for Photovoltaic Infrastructure in China"*.
 
 The PVCF dataset systematically compares, cross-validates and fuses nine
@@ -10,14 +10,16 @@ publicly available PV datasets covering China, supported by DeepLab V3+
 based validation and extensive manual annotation, to produce an updated,
 spatially consistent PV vector dataset.
 
-The PVCF vector dataset itself (`PVCFv1.shp`) is distributed separately;
-this repository provides only the custom processing code.
+The PVCF vector dataset itself (`PVCFv1.shp`) is distributed separately on
+Zenodo (https://doi.org/10.5281/zenodo.21255087) under the CC BY-NC 4.0
+license; this repository provides only the custom processing code, which is
+released under the MIT License.
 
 ## Repository contents
 
 | File | Description |
 |------|-------------|
-| `fusion.py` | Multi-source data fusion. Integrates nine publicly available PV datasets into a harmonised product. Inputs are the raw vector files of the nine source datasets; the output is a fused PV distribution map in GeoTIFF format, where each pixel value records the number of source datasets identifying it as PV (the spatial-consistency overlap count). |
+| `fusion.py` | Multi-source data fusion. Integrates nine publicly available PV datasets into a harmonised product. Inputs are the raw vector files of the nine source datasets; the output is a fused PV distribution map in GeoTIFF format, where each pixel value records the number of source datasets identifying it as PV (the spatial agreement overlap count). |
 | `train.py` | Training script for the DeepLab V3+ semantic segmentation model used to identify PV installations from remote sensing imagery. Includes data preprocessing, hyperparameter search, model training and validation. |
 | `retrieve.py` | Validates newly retrieved candidate PV polygons with the trained DeepLab V3+ model, retaining patches whose IoU exceeds 0.5 (PASCAL VOC protocol). Supports reproduction of the validation procedure and extension of the database in future years. |
 | `example_data/` | A small real example dataset (PV polygons and image tiles) for verifying the environment and testing `train.py` and `retrieve.py`. |
@@ -94,8 +96,8 @@ python fusion.py \
 
 Output: `output/fusion/merged.tif` — a GeoTIFF in which each pixel value is
 the number of source datasets that identify the pixel as PV. This overlap
-count is the spatial-consistency indicator used to define low-, medium- and
-high-confidence regions in the manuscript.
+count is the spatial agreement indicator used to define low, medium and
+high agreement regions in the manuscript.
 
 ### 2. Train the DeepLab V3+ model (`train.py`)
 
@@ -152,13 +154,27 @@ and corresponding versioned releases are archived on Zenodo with a
 permanent digital object identifier.
 
 - GitHub: https://github.com/JJRYJRY/china-solar
-- Zenodo: https://doi.org/10.5281/zenodo.20264929
+- Zenodo: https://doi.org/10.5281/zenodo.21255087
+
+## Annotation platform access
+
+The annotation platform used to produce the PVCF dataset is hosted on an
+institutional intranet. Restricted access to the PV annotation module is
+available upon reasonable request to the corresponding author
+(zhanglixiao@bnu.edu.cn). Requests will normally be answered within three
+working days.
 
 ## Citation
 
 If you use this code or the PVCF dataset, please cite the associated
 manuscript. The full citation will be added here once the article is
-published.
+published. The dataset itself can be cited as:
+
+```text
+Jia, R. et al. PVCF v1: A High-Resolution, Spatially Consistent
+Multi-Source Fusion Dataset for Photovoltaic Infrastructure in China.
+[Dataset]. Zenodo. https://doi.org/10.5281/zenodo.21255087
+```
 
 ## Contact
 
